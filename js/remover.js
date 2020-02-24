@@ -1,5 +1,3 @@
-let pacientes = document.querySelectorAll('.paciente');
-
 let tabela = document.querySelector('#tabela-pacientes');
 
 tabela.addEventListener('dblclick', function (event) {
@@ -10,11 +8,11 @@ tabela.addEventListener('dblclick', function (event) {
     paiAlvo.classList.add('fadeOut');
 
     //para esperar a funcao acima funcionar
-    setTimeout(() => {
+    setTimeout(() => { //arrow function - a function estah oculta mas ela existe
         
         //ao  inves de excluir o alvo apenas (td) ele exclui o pai consigo (tr);
         paiAlvo.remove();
-    }, 700); //milisegundos para executar
+    }, 600); //milisegundos para executar
 
 
 });
