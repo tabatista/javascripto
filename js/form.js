@@ -9,19 +9,13 @@ botaoAdd.addEventListener('click', function (event) {
 
     let paciente = obterPaciente(form);
 
-    //cria um novo item na lista
-    let pacienteTr = montarTr(paciente);
-
     let erros = validarPaciente(paciente);
     if (erros.length > 0) {
         exibirMensagemErro(erros);
         return;
-    } else{
-
     }
-
-    let tabela = document.querySelector("#tabela-pacientes");
-    tabela.appendChild(pacienteTr);
+    
+    adicionarPacienteTabela(paciente);
 
     //apaga os dados do form
     form.reset();
@@ -66,38 +60,48 @@ function montarTd(dado, classe) {
     return td;
 };
 
-function exibirMensagemErro(erros){
+function exibirMensagemErro(erros) {
     let ul = document.querySelector('#mensagens-error');
-    
+
     //a innerHTML eh uma propriedade que controla o html interno de um elemento
     ul.innerHTML = ''; //limpa o conteudo - li - da ul
 
     //foreach
-    erros.forEach(function(erro){
+    erros.forEach(function (erro) {
         let li = document.createElement('li');
         li.classList.add('msg-error');
         li.textContent = erro;
         ul.appendChild(li);
     });
- 
+
 
     //ul.textContent = '';
 };
 
-function validarPaciente(paciente){
+function validarPaciente(paciente) {
     let erros = validarDados(paciente.altura, paciente.peso);
-    
-    if(paciente.nome.length == 0)
+
+    if (paciente.nome.length == 0)
         erros.push('Nome nao pode ser em branco');
-    
-    if(paciente.gordura.length == 0)
+
+    if (paciente.gordura.length == 0)
         erros.push('Gordura nao pode ser em branco');
 
-    if(paciente.peso.length == 0)
+    if (paciente.peso.length == 0)
         erros.push('Peso nao pode ser em branco');
 
-    if(paciente.altura.length == 0)
+    if (paciente.altura.length == 0)
         erros.push('Altura nao pode ser em branco');
 
     return erros;
 };
+
+function adicionarPacienteTabela(paciente) {
+
+    //cria um novo item na lista
+    let pacienteTr = montarTr(paciente);
+
+    let tabela = document.querySelector("#tabela-pacientes");
+    tabela.appendChild(pacienteTr);
+
+}
