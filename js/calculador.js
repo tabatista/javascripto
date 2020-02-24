@@ -28,10 +28,15 @@ function calcularIMC(altura, peso) {
 };
 
 function validarDados(altura, peso) {
-    if (altura >= 3 || altura < 0 || peso >= 1000 || peso < 0) {
-        return false;
-    }
-    return true;
+    let erros = [];
+
+    if (altura >= 3 || altura < 0)
+        erros.push('Altura invalida');
+
+    if (peso >= 1000 || peso < 0)
+        erros.push('Peso invalido');
+
+    return erros;
 };
 
 function preencherAllIMC() {
@@ -50,7 +55,7 @@ function preencherAllIMC() {
 
         let imc = calcularIMC(altura, peso);
         let tdImc = paciente.querySelector('.info-imc');
-        if (isValido) {
+        if (isValido.length == 0) {
             //limitar o numero de casas decimais  com o toFixed
             tdImc.textContent = imc.toFixed(2);
         } else {
